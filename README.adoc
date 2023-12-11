@@ -8,7 +8,7 @@ Ce dépôt concerne les rendus de mailto:A_changer@etu.univ-tlse2.fr[Jonh Doe].
 == TP1
 
 .is_it_friday_yet.feature
-[source,java]
+[source,text]
 ---
 Feature: Is it Friday yet?
   Everybody wants to know when it's Friday
