@@ -24,16 +24,10 @@ public class StepDefinitions {
         return null;
     }
 
-    @Given("today is Sunday")
-    public void today_is_sunday() {
+    @Given("today is {string}")
+    public void today_is(String day) {
         // Write code here that turns the phrase above into concrete actions
-        this.today = "Sunday";
-    }
-
-    @Given("today is Friday")
-    public void today_is_fridat() {
-        // Write code here that turns the phrase above into concrete actions
-        this.today = "Friday";
+        this.today = day;
     }
 
     @When("I ask whether it's Friday yet")
