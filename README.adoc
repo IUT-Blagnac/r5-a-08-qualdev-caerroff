@@ -84,7 +84,7 @@ public class Order {
 
 ----
 
-Et mes tests qui fonctionnent:
+.Mes tests qui fonctionnent:
 image::tp2.png[width=80%]
 
 
@@ -168,5 +168,5 @@ Les tests écris en PHP :
     }
 ----
 
-Et les tests qui passent:
+.Mes tests qui passent:
 image::tp3.png[width=80%]
