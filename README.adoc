@@ -86,3 +86,87 @@ public class Order {
 
 Et mes tests qui fonctionnent:
 image::tp2.png[width=80%]
+
+
+== TP3
+
+Pour ce TP, j'ai décidé de faire des tests sur l'application que je développe en entreprise, une application de gestion de matériels, de personnel et de tickets.
+L'application est écrite en Symfony (framework PHP) et possède beaucoup d'entités (objets) qui doivent être testés.
+J'ai donc écris quelques tests pour une entité.
+
+Voici mon fichier Feature : 
+----
+Feature: Contact creation
+
+    Scenario: I create a contact and fill its informations, I should be able to retrieve them.
+    Given I create a contact named "TestContact"
+    When I retrieve its informations
+    Then the name should be "TestContact"
+
+    Scenario: I add an atelier to the contact, the contact should be assigned to the atelier
+    Given I create a contact named "AtelierContact"
+    When I assign it to the atelier 1
+    Then the contact should have the atelier 1
+
+    Scenario: I add an atelier to the contact, the contact should be assigned to the atelier
+    Given I create a contact named "AtelierContact"
+    When I assign it to the atelier 5
+    Then the contact should not have the atelier 1
+----
+
+Les tests écris en PHP :
+----
+    /**
+     * @Given I create a contact named :arg1
+     */
+    public function iCreateAContactNamed($arg1)
+    {
+        $this->contact = new Contacts();
+        $this->contact->setNom($arg1);
+    }
+
+    /**
+     * @When I retrieve its informations
+     */
+    public function iRetrieveItsInformations()
+    {
+        $this->informationRetrieved = $this->contact->getNom();
+    }
+
+    /**
+     * @Then the name should be :arg1
+     */
+    public function theNameShouldBe($arg1)
+    {
+        assert($this->informationRetrieved == $arg1, new Exception('Les noms ne sont pas les mêmes'));
+    }
+
+    /**
+     * @When I assign it to the atelier :arg1
+     */
+    public function iAssignItToTheAtelier($arg1)
+    {
+        $this->atelier = new Atelier();
+        $this->atelier->setId($arg1);
+        $this->contact->setAtelier($this->atelier);
+    }
+
+    /**
+     * @Then the contact should have the atelier :arg1
+     */
+    public function theContactShouldHaveTheAtelier($arg1)
+    {
+        assert($this->contact->getAtelier()->getId() == $arg1);
+    }
+
+    /**
+     * @Then the contact should not have the atelier :arg1
+     */
+    public function theContactShouldNotHaveTheAtelier($arg1)
+    {
+        assert($this->contact->getAtelier()->getId() != $arg1);
+    }
+----
+
+Et les tests qui passent:
+image::tp3.png[width=80%]
